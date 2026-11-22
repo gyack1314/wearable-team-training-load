@@ -1,0 +1,338 @@
+{
+  "tables": {
+    "people": {
+      "description": "人员主档",
+      "columns": [
+        {
+          "name": "person",
+          "type": "str",
+          "nullable": false,
+          "description": "人员编号"
+        },
+        {
+          "name": "household",
+          "type": "str",
+          "nullable": false,
+          "description": "登记家庭编号"
+        },
+        {
+          "name": "segment",
+          "type": "str",
+          "nullable": false,
+          "description": "长期客群"
+        },
+        {
+          "name": "home_zone",
+          "type": "str",
+          "nullable": false,
+          "description": "常居时区"
+        }
+      ],
+      "primary_key": "person",
+      "references": {}
+    },
+    "activity": {
+      "description": "设备观测到的活动区间",
+      "columns": [
+        {
+          "name": "record",
+          "type": "str",
+          "nullable": false,
+          "description": "记录"
+        },
+        {
+          "name": "person",
+          "type": "str",
+          "nullable": false,
+          "description": "队员"
+        },
+        {
+          "name": "device",
+          "type": "str",
+          "nullable": false,
+          "description": "来源设备"
+        },
+        {
+          "name": "session",
+          "type": "str",
+          "nullable": false,
+          "description": "来源活动"
+        },
+        {
+          "name": "sport",
+          "type": "str",
+          "nullable": false,
+          "description": "运动类型"
+        },
+        {
+          "name": "start",
+          "type": "datetime",
+          "nullable": false,
+          "description": "开始"
+        },
+        {
+          "name": "end",
+          "type": "datetime",
+          "nullable": false,
+          "description": "结束"
+        },
+        {
+          "name": "distance_m",
+          "type": "float",
+          "nullable": true,
+          "description": "距离米"
+        },
+        {
+          "name": "mean_hr",
+          "type": "float",
+          "nullable": true,
+          "description": "平均心率"
+        },
+        {
+          "name": "hr_coverage",
+          "type": "float",
+          "nullable": false,
+          "description": "心率覆盖比例"
+        },
+        {
+          "name": "received",
+          "type": "datetime",
+          "nullable": false,
+          "description": "收到时间"
+        }
+      ],
+      "primary_key": "record",
+      "references": {
+        "person": "people.person"
+      }
+    },
+    "feedback": {
+      "description": "队员主观用力及疲劳反馈",
+      "columns": [
+        {
+          "name": "record",
+          "type": "str",
+          "nullable": false,
+          "description": "反馈"
+        },
+        {
+          "name": "person",
+          "type": "str",
+          "nullable": false,
+          "description": "队员"
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "nullable": false,
+          "description": "活动日"
+        },
+        {
+          "name": "rpe",
+          "type": "int",
+          "nullable": true,
+          "description": "主观用力1到10"
+        },
+        {
+          "name": "fatigue",
+          "type": "int",
+          "nullable": true,
+          "description": "疲劳1到10"
+        },
+        {
+          "name": "received",
+          "type": "datetime",
+          "nullable": false,
+          "description": "接收"
+        }
+      ],
+      "primary_key": "record",
+      "references": {
+        "person": "people.person"
+      }
+    },
+    "classes": {
+      "description": "团课候选与来源已通知活动",
+      "columns": [
+        {
+          "name": "class",
+          "type": "str",
+          "nullable": false,
+          "description": "团课"
+        },
+        {
+          "name": "sport",
+          "type": "str",
+          "nullable": false,
+          "description": "类型"
+        },
+        {
+          "name": "start",
+          "type": "datetime",
+          "nullable": false,
+          "description": "开始"
+        },
+        {
+          "name": "end",
+          "type": "datetime",
+          "nullable": false,
+          "description": "结束"
+        },
+        {
+          "name": "coach",
+          "type": "str",
+          "nullable": false,
+          "description": "教练"
+        },
+        {
+          "name": "venue",
+          "type": "str",
+          "nullable": false,
+          "description": "场地"
+        },
+        {
+          "name": "intensity",
+          "type": "int",
+          "nullable": false,
+          "description": "强度等级"
+        },
+        {
+          "name": "minimum",
+          "type": "int",
+          "nullable": false,
+          "description": "最低人数"
+        },
+        {
+          "name": "capacity",
+          "type": "int",
+          "nullable": false,
+          "description": "最多人数"
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "nullable": false,
+          "description": "状态"
+        }
+      ],
+      "primary_key": "class",
+      "references": {}
+    },
+    "participation": {
+      "description": "参与意向、通知及出席事实",
+      "columns": [
+        {
+          "name": "record",
+          "type": "str",
+          "nullable": false,
+          "description": "记录"
+        },
+        {
+          "name": "class",
+          "type": "str",
+          "nullable": false,
+          "description": "团课"
+        },
+        {
+          "name": "person",
+          "type": "str",
+          "nullable": false,
+          "description": "队员"
+        },
+        {
+          "name": "mode",
+          "type": "str",
+          "nullable": false,
+          "description": "参与方式"
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "nullable": false,
+          "description": "事实类型"
+        }
+      ],
+      "primary_key": "record",
+      "references": {
+        "class": "classes.class",
+        "person": "people.person"
+      }
+    },
+    "availability": {
+      "description": "队员可参加窗口",
+      "columns": [
+        {
+          "name": "record",
+          "type": "str",
+          "nullable": false,
+          "description": "窗口"
+        },
+        {
+          "name": "person",
+          "type": "str",
+          "nullable": false,
+          "description": "队员"
+        },
+        {
+          "name": "start",
+          "type": "datetime",
+          "nullable": false,
+          "description": "开始"
+        },
+        {
+          "name": "end",
+          "type": "datetime",
+          "nullable": false,
+          "description": "结束"
+        },
+        {
+          "name": "max_intensity",
+          "type": "int",
+          "nullable": false,
+          "description": "允许的最高强度"
+        }
+      ],
+      "primary_key": "record",
+      "references": {
+        "person": "people.person"
+      }
+    },
+    "resources": {
+      "description": "教练与场地的资源窗口",
+      "columns": [
+        {
+          "name": "record",
+          "type": "str",
+          "nullable": false,
+          "description": "记录"
+        },
+        {
+          "name": "resource",
+          "type": "str",
+          "nullable": false,
+          "description": "资源"
+        },
+        {
+          "name": "start",
+          "type": "datetime",
+          "nullable": false,
+          "description": "开始"
+        },
+        {
+          "name": "end",
+          "type": "datetime",
+          "nullable": false,
+          "description": "结束"
+        },
+        {
+          "name": "capacity",
+          "type": "int",
+          "nullable": false,
+          "description": "同时容纳活动数"
+        }
+      ],
+      "primary_key": "record",
+      "references": {}
+    }
+  }
+}

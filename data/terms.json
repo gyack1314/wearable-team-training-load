@@ -1,0 +1,24 @@
+{
+  "training": {
+    "high_intensity": 3,
+    "high_load_gap_hours": 36,
+    "modes": {
+      "normal": {
+        "load_fraction": 1.0,
+        "coach_units": 1
+      },
+      "reduced": {
+        "load_fraction": 0.55,
+        "coach_units": 1
+      },
+      "alternative": {
+        "load_fraction": 0.4,
+        "coach_units": 1,
+        "separate_coach": true
+      }
+    }
+  },
+  "capacity": "一名教练同一时刻只能承担一个教学组，normal与reduced可同组，alternative需要另一教练和可用场地",
+  "notified": "通知后改变参与方式或取消需教练再次确认；实际完成事实不可撤回",
+  "load": "负荷模型可选择，但需说明运动类型尺度、缺测区间、个人基线及数据支持，不能将单一指标当医学结论"
+}

@@ -1,0 +1,6 @@
+record,class,person,mode,status
+T001,S04,P03,normal,notified
+T002,S04,P04,normal,notified
+T003,S04,P05,normal,notified
+T004,S04,P06,normal,notified
+T010,S03,P06,normal,attended
